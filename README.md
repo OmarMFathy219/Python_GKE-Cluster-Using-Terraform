@@ -1,8 +1,8 @@
-# Provision Private GKE cluster and Bastion Host on GCP Using Terraform
-#### Deploy Python Application ![Project link] (https://github.com/atefhares/DevOps-Challenge-Demo-Code)
-1. Docrize python web application using docker 
+#GKE cluster and Bastion Host on GCP Using Terraform
+#### Deploy a Python Application ![Project link] (https://github.com/atefhares/DevOps-Challenge-Demo-Code)
+1. Dockarize a python web application using docker
 2. Pull redis image from docker Hub 
-3. push 2 image to gcr on GCP
+3. push 2 image to GCR on GCP
 ```
 gcloud auth configure-docker gcr.io
 docker tag web-app  gcr.io/final-project/python-app
