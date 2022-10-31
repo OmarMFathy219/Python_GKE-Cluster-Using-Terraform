@@ -66,8 +66,8 @@ kubectl get ingress
 #Clean up 💣
 ```
 kubectl delete -f ./k8s
-
+```
+```
 terraform destroy 
-
-
+```
 ```
