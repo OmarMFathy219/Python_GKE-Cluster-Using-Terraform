@@ -1,37 +1,66 @@
-# GCP_Project_ITI
+# Provision Private GKE cluster and Bastion Host on GCP Using Terraform
+#### Deploy Python Application ![Project link] (https://github.com/atefhares/DevOps-Challenge-Demo-Code)
+1. Docrize python web application using docker 
+2. Pull redis image from docker Hub 
+3. push 2 image to gcr on GCP
+```
+gcloud auth configure-docker gcr.io
+docker tag web-app  gcr.io/final-project/python-app
+docker push gcr.io/final-project/python-app
 
-### For the terraform code
-  * $ terraform init
-  * $ terraform plan
-  * $ terraform apply
+docker tag redis gcr.io/final-project/redis
+docker push gcr.io/final-project/redis
 
-### Build Docker image for the pyhton app from the Dockerfile, and upload the image to gcr
-  * $ docker build -t image-name .
-  * $ docker tag image-name gcr.io/my-project/image-name
-  * $ docker push gcr.io/my-project/image-name
+```
+# Infrastructure Resoureces on GCP
+1. Make backend configuration using GCP Bucket
+2. Create VPC
+* subnets (management subnet & restricted subnet)
+* Management subnet has the (NAT gateway , Private vm)
+* Restricted subnet has the (Private standard GKE cluster (private control plan))
+Notes:
+1. Restricted subnet must not have access to internet
+2. All images deployed on GKE must come from GCR or Artifacts registry.
+3. The VM must be private.
+4. Deployment must be exposed to public internet with a public HTTP load balancer.
+5. All infra is to be created on GCP using terraform.
+6. Deployment on GKE can be done by terraform or manually by kubectl tool.
+7. Don’t use default compute service account while creating the gke cluster, create
+custom SA and attach it to your nodes.
+8. Only the management subnet can connect to the gke cluster.
 
-### Pull another redis image from docker hub then push it to gcr
+# To run Terraform code
+```
+terraform init
+terraform plan --var-file variables.tfvars 
+terraform plan --var-file variables.tfvars
+```
+![My image](home/karim/Documents/GCP/Final_Project/GCP_Project_ITI/prove.png)
+# authenticate with the cluster
+```
+gcloud container clusters get-credentials mycluster --zone us-west2-a --project final-project
+```
+```
+gcloud compute ssh mymachine --project final-project --zone us-west2-a -- -L8888:localhost:8888
+```
+#### Run Kubectl using this command or do export
+```
+HTTPS_PROXY=localhost:8888 kubectl
+## or use 
+export HTTPS_PROXY=localhost:8888
+kubectl
+```
 
-### SSH to the private VM:
+## Deploy Kuberentes Files
+```
+kubectl apply -fR ./kubernetes
+```
+```
+kubectl get ingress
+```
 
-### Install kubectl
-  * $ sudo apt-get update
-  * $ sudo snap install kubectl --classic
-  * $ kubectl --help
-
-### authorize gcloud to access the Cloud Platform with Google user credentials
-  * $ gcloud auth login
-
-### SSH to GKE
-  * copy gke-dep directory
-  * $ kubectl create -Rf gke-dep
-  * $ kubectl get svc
-
-### get the load balancer IP and port
-
-
-![image](https://user-images.githubusercontent.com/13887135/181519952-214e4bd6-29b3-4150-be80-1f289a662940.png)
-
-![image](https://user-images.githubusercontent.com/13887135/181519724-a9c3a20e-99a9-4c11-986f-1f1754644496.png)
-
+### Finally Destroy Infrastructur
+```
+terraform destroy --var-file variables.tfvars
+```
 
