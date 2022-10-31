@@ -35,7 +35,7 @@ terraform init
 terraform plan --var-file variables.tfvars 
 terraform plan --var-file variables.tfvars
 ```
-<img src="/Home/karim/Documents/GCP/Final_Project/GCP_Project_ITI/prove.png" alt="Prove">
+<img src="GCP_Project_ITI/prove.png" alt="Prove">
 
 # authenticate with the cluster
 ```
