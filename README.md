@@ -63,8 +63,11 @@ kubectl apply -fR ./kubernetes
 kubectl get ingress
 ```
 
-### Finally Destroy Infrastructur
+#Clean up 💣
 ```
-terraform destroy --var-file variables.tfvars
-```
+kubectl delete -f ./k8s
 
+terraform destroy 
+
+
+```
