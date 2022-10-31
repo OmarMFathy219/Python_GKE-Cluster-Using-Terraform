@@ -15,9 +15,9 @@ docker push gcr.io/final-project/redis
 # Infrastructure Resoureces on GCP
 1. Make backend configuration using GCP Bucket
 2. Create VPC
-* subnets (management subnet & restricted subnet)
-* Management subnet has the (NAT gateway , Private vm)
-* Restricted subnet has the (Private standard GKE cluster (private control plan))
+	* subnets ( management subnet & restricted subnet )
+	* Management subnet has the ( NAT gateway , Private vm )
+	* Restricted subnet has the ( Private standard GKE cluster ( private control plan ))
 Notes:
 1. Restricted subnet must not have access to internet
 2. All images deployed on GKE must come from GCR or Artifacts registry.

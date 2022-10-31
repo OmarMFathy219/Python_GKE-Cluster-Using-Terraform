@@ -1,7 +1,7 @@
 #creating private cluster ans associate it to restricted subnet
 resource "google_container_cluster" "private-cluster" {
   name     = "private-cluster"
-  location = "us-central1-a"
+  location = "us-west2-a"
   # creating the least possible node pool  
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -32,7 +32,7 @@ resource "google_container_cluster" "private-cluster" {
 
 resource "google_container_node_pool" "nodepool" {
   name       = "nodepool"
-  location   = "us-central1-a"
+  location   = "us-west2-a"
   cluster    = google_container_cluster.private-cluster.id
   node_count = 1
 

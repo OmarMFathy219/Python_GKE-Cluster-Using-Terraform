@@ -2,7 +2,7 @@
 resource "google_compute_instance" "private-vm" {
   name         = "private-vm"
   machine_type = "e2-micro"
-  zone         = "us-central1-a"
+  zone         = "us-west1-a"
   boot_disk {
     initialize_params {
       image = "ubuntu-os-cloud/ubuntu-1804-lts"
