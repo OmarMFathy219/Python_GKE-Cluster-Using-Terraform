@@ -4,12 +4,12 @@
 2. Pull redis image from docker Hub 
 3. push 2 image to GCR on GCP
 ```
+# Authenticate to GCR using gcloud
 gcloud auth configure-docker gcr.io
+# Tag the image 
 docker tag web-app  gcr.io/final-project/python-app
+# Push the image to GCR
 docker push gcr.io/final-project/python-app
-
-docker tag redis gcr.io/final-project/redis
-docker push gcr.io/final-project/redis
 
 ```
 # Infrastructure Resoureces on GCP
@@ -31,9 +31,12 @@ custom SA and attach it to your nodes.
 
 # To run Terraform code
 ```
+# initialize terraform
 terraform init
-terraform plan --var-file variables.tfvars 
-terraform plan --var-file variables.tfvars
+# check plan
+terraform plan 
+# apply the plan it will take some time to complete 
+terraform apply --auto-approve
 ```
   <img  src="prove.png">
 
